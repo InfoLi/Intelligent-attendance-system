@@ -1,5 +1,5 @@
 # Intelligent attendance system
- 软院大三实训《智能考勤系统》
+ 软院大三实训《智能考勤系统》  
 /models:下放训练好的人脸识别模型
 /template:存放前端网页的静态模板
 /static:存放构成网页的静态资源（css,js,图片等）
