@@ -1,0 +1,52 @@
+h1{
+	text-align: center;
+	margin-top: 10px;
+	font-size: 40px;
+	color: #5EBBEA;
+	text-shadow:2px 2px 2px #90DDEF;
+	font-weight: normal;
+}
+body{
+	background-color: #EAEAEA;
+	font-family: "微软雅黑",Arial,Verdana,Sans-serif;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.right{
+margin-left: 350px;
+
+}
+
+
+.form-group{
+	width: 50%;
+	margin: 18px 40px;
+}
+
+.col-sm-2{
+	width: 10%;
+	padding: 0;
+	line-height: 45px;
+}
+
+.form-control{
+	margin: 8px 0;
+}
+
+.insert-group{
+	width: 100%;
+}
+
+.btn{
+	margin-left: 40px;
+}
+
+.pwd-forget{
+	text-decoration: none;
+	float: right;
+	font-size: 14px;
+	color: #5EBBEA;
+
+	margin-right: 145px;
+}

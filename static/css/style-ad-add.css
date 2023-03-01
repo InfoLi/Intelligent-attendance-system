@@ -1,0 +1,14 @@
+.form-group{
+	width: 50%;
+	margin: 18px 40px;
+}
+
+.col-sm-2{
+	width: 15%;
+	padding: 0;
+	line-height: 45px;
+}
+
+.form-control{
+	margin: 8px 0;
+}

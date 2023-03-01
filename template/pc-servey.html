@@ -1,0 +1,90 @@
+<!DOCTYPE html
+   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+   <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
+   <link rel="stylesheet" type="text/css" href="../css/style-ac-servey.css">
+   <link rel="stylesheet" type="text/css" href="../css/unit.css">
+   <script src="../js/echarts.min.js"></script>
+   <script src="../js/jquery-3.6.0.min.js"></script>
+   <script type="text/javascript" src="../js/charts.js"></script>
+   <script type="text/javascript" src="../js/unit.js">
+   </script>
+
+   <title>企业考勤管理系统-个人账户</title>
+</head>
+
+<body onload="startTime();fillSelect();">
+   <div class="head">
+      <h2>企业管理系统</h2>
+      <div class="head-right">
+         <span class="head-help"><a href="#">帮助</a></span>
+         <div id="head-time"></div>
+      </div>
+   </div>
+   <div id="navigation">
+      <nav role="navigation">
+         <ul>
+            <a href="/person/home">
+               <li>首页</li>
+            </a>
+            <a href="/person/info">
+               <li>个人信息</li>
+            </a>
+            <a href="/person/input">
+               <li>人脸录入</li>
+            </a>
+            <a href="/person/check" class="li-active">
+               <li>考勤记录</li>
+            </a>
+            <a href="/person/apply">
+               <li>请假管理</li>
+            </a>
+            <a target=“_blank” href="/person/meet">
+               <li>视频会议</li>
+            </a>
+            <button style="padding:0 10px; margin:10px 60px 0 0; float:right;">签到</button>
+         </ul>
+      </nav>
+   </div>
+   <div class="left-list">
+      <a href="/person/check">
+         <div class="left-child">签到</div>
+      </a>
+      <a href="/person/overview">
+         <div class="ll-active">概况记录</div>
+      </a>
+      <a href="pc-sign.html">
+         <div class="left-child">签到查询</div>
+      </a>
+   </div>
+   <div class="right">
+      <span class="title-bar">考勤记录<i class="fa fa-angle-right" style="letter-spacing:2px;"></i>概况</span><br /><br />
+      <span class="title-bar">考勤查询</span><br />
+      <div class="servey_search">
+         <span>年份</span>
+         <select id="calender_select_year">
+         </select>
+         <span>月份</span>
+         <select id="calender_select_month">
+         </select>
+         <button onclick="calender();">查询</button>
+      </div>
+      <div id="servey_grid">
+         <div id="calendar_echart" style="height: 600px;width: 600px;margin: 0px;float: left;"></div>
+         <div id="click_div" class="sign">
+            <div id="info_div">
+               <p onclick="change()">详细信息</p>
+               <a id="back" onclick="change()">返回</a><a id="clear" onclick="clearNodes()">清理</a><br>
+               <ul id="click_ul">
+               </ul>
+            </div>
+         </div>
+      </div>
+   </div>
+</body>
+
+</html>

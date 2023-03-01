@@ -1,0 +1,25 @@
+.form-group{
+	width: 100%;
+	margin: 18px 40px;
+}
+
+.col-sm-2{
+	width: 10%;
+	padding: 0;
+	line-height: 45px;
+}
+
+.form-control{
+	width: 50%;
+	margin: 8px 0;
+}
+
+.department-member{
+	width: 100%;
+	margin-top: 30px;
+}
+
+.pagination-self{
+	width: 100%;
+	text-align: center;
+}

@@ -1,0 +1,63 @@
+.order{
+	width: 40%;
+	margin: 20px 20px 20px 0;
+	float: left;
+}
+
+.Calendar {
+	float: left;
+    font-family:Verdana;
+    font-size:12px;
+    background-color:#e0ecf9;
+    text-align:center;
+    width:225px;
+    height:160px;
+    padding:10px;
+    line-height:1.5em;
+    margin-left: 40px;
+    margin-top: 20px;
+}
+.Calendar a{
+    color:#1e5494;
+}
+
+.Calendar table{
+	width:100%;
+	border:0;
+}
+
+.Calendar table thead{color:#acacac;}
+
+.Calendar table td {
+    font-size: 11px;
+    padding:1px;
+}
+#idCalendarPre{
+    cursor:pointer;
+    float:left;
+    padding-right:5px;
+}
+#idCalendarNext{
+    cursor:pointer;
+    float:right;
+    padding-right:5px;
+}
+#idCalendar td.onToday {
+    font-weight:bold;
+    color:#C60;
+}
+#idCalendar td.onSelect {
+    font-weight:bold;
+}
+
+.sign{
+	width: 80%;
+	margin: 10px 40px;
+	border-radius: 3px;
+	border: 1px solid #EAEAEA;
+	padding: 20px;
+}
+
+.btn{
+	float: right;
+}

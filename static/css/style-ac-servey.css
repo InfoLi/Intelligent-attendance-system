@@ -1,0 +1,84 @@
+.form-group{
+	width: 50%;
+	margin: 18px 40px;
+}
+
+.col-sm-2{
+	width: 10%;
+	padding: 0;
+	line-height: 45px;
+}
+
+.form-control{
+	width: 80%;
+	margin: 8px 0;
+	float: left;
+}
+
+.as-result{
+	margin-top: 30px;
+}
+
+.pagination-self{
+	width: 100%;
+	text-align: center;
+}
+
+.servey_search{
+	width: auto;
+	margin: 15px 0 0 40px;
+	box-sizing: border-box;
+	border-radius: 3px;
+    border: 1px solid #EAEAEA;
+}
+
+
+
+
+
+.info_li{
+	box-sizing: border-box;
+	display:none;
+	padding: 0px;
+}
+
+#info_div{
+	text-align: center;
+	box-sizing: border-box;
+	box-shadow: 0px 0px 10px #eae7e7;
+	float: right;
+	width: 25px;
+	height: 100px;
+	transition: height 1s;
+	-moz-transition: height 1s; /* Firefox 4 */
+	-webkit-transition: height 1s; /* Safari 和 Chrome */
+	-o-transition: height 1s; /* Opera */
+}
+
+#back{
+	display: none;
+	float: left;
+}
+
+#clear{
+	display: none;
+	float: right;
+}
+
+#servey_grid{
+	grid-template-columns: 600px auto;
+	display: grid;
+}
+
+#click_div{
+	float: right;
+	width: auto;
+	background-color: eae7e7;
+}
+
+#click_ul{
+	list-style: none;
+	height: auto;
+	padding: 0px;
+}
+

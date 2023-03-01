@@ -1,0 +1,200 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/style-pc-fillcheck.css">
+  <link rel="stylesheet" type="text/css" href="../css/unit.css">
+  <script type="text/javascript" src="../js/unit.js"></script>
+  <script type="text/javascript" src="../js/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="../js/js-pv-apply.js"></script>
+
+  <title>企业考勤管理系统-个人账户</title>
+</head>
+
+<body onload="startTime()">
+  <div class="head">
+    <h2>企业管理系统</h2>
+    <div class="head-right">
+      <span class="head-help"><a href="#">帮助</a></span>
+      <div id="head-time"></div>
+    </div>
+  </div>
+  <div id="navigation">
+    <nav role="navigation">
+      <ul>
+        <a href="/person/home">
+          <li>首页</li>
+        </a>
+        <a href="/person/info">
+          <li>个人信息</li>
+        </a>
+        <a href="/person/input">
+          <li>人脸录入</li>
+        </a>
+        <a href="/person/check">
+          <li>考勤记录</li>
+        </a>
+        <a href="/person/apply">
+          <li class="li-active">请假管理</li>
+        </a>
+        <a target=“_blank” href="/person/meet">
+          <li>视频会议</li>
+        </a>
+      </ul>
+    </nav>
+  </div>
+  <div class="left-list">
+    <a href="/person/applog">
+      <div class="left-child">申请日志</div>
+    </a>
+    <a href="/person/apply">
+      <div class="ll-active">申请</div>
+    </a>
+  </div>
+  <div class="right">
+    <span class="title-bar">请假管理<i class="fa fa-angle-right" style="letter-spacing:2px;"></i>请假申请</span>
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">部门</label>
+      <div class="col-sm-10">
+
+        <select id="pvdepartment" class="form-control">
+          <option>{{ department }}</option>
+        </select>
+      </div>
+      <label for="name" class="col-sm-2 control-label">起始时间</label>
+      <div class="col-sm-10">
+        <select id="startyear" class="form-control">
+          <!--                <option id="startyear"></option>-->
+
+        </select>
+        <span style="float:right;margin:15px 40px 0 0;">年</span>
+      </div>
+      <div class="col-sm-10">
+        <select id="startmonth" class="form-control">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+          <option>11</option>
+          <option>12</option>
+
+        </select>
+        <span style="float:right;margin:15px 40px 0 0;">月</span>
+      </div>
+      <div class="col-sm-10">
+        <select id="startday" class="form-control">
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+          <option>11</option>
+          <option>12</option>
+          <option>13</option>
+          <option>14</option>
+          <option>15</option>
+          <option>16</option>
+          <option>17</option>
+          <option>18</option>
+          <option>19</option>
+          <option>20</option>
+          <option>21</option>
+          <option>22</option>
+          <option>23</option>
+          <option>24</option>
+          <option>25</option>
+          <option>26</option>
+          <option>27</option>
+          <option>28</option>
+          <option>29</option>
+          <option>30</option>
+          <option>31</option>
+
+        </select>
+        <span style="float:right;margin:15px 40px 0 0;">日</span>
+      </div>
+      <label for="name" class="col-sm-2 control-label">结束时间</label>
+      <div class="col-sm-10">
+        <select id="endyear" class="form-control">
+
+        </select>
+        <span style="float:right;margin:15px 40px 0 0;">年</span>
+      </div>
+      <div class="col-sm-10">
+        <select id="endmonth" class="form-control">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+          <option>11</option>
+          <option>12</option>
+        </select>
+        <span style="float:right;margin:15px 40px 0 0;">月</span>
+      </div>
+      <div class="col-sm-10">
+        <select id="endday" class="form-control">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+          <option>11</option>
+          <option>12</option>
+          <option>13</option>
+          <option>14</option>
+          <option>15</option>
+          <option>16</option>
+          <option>17</option>
+          <option>18</option>
+          <option>19</option>
+          <option>20</option>
+          <option>21</option>
+          <option>22</option>
+          <option>23</option>
+          <option>24</option>
+          <option>25</option>
+          <option>26</option>
+          <option>27</option>
+          <option>28</option>
+          <option>29</option>
+          <option>30</option>
+          <option>31</option>
+        </select>
+        <span style="float:right;margin:15px 40px 0 0;">日</span>
+      </div>
+      <label for="name" class="col-sm-2 control-label">申请理由</label>
+      <div class="col-sm-10">
+        <textarea id="leavereason" class="form-control" rows="6" style="width:172%;"></textarea>
+      </div>
+      <label for="name" class="col-sm-2 control-label"></label>
+      <div class="col-sm-10">
+        <input type="submit" id="askforleave" name="submit" class="form-control" value="提交">
+      </div>
+    </div>
+  </div>
+</body>

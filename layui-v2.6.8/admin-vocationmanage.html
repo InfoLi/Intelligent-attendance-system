@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>考勤系统</title>
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" href="/static/build/layui.css" media="all">
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo layui-hide-xs layui-bg-black">智慧考勤系统</div>
+        <!-- 头部区域（可配合layui 已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <!-- 移动端显示 -->
+            <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-header-event="menuLeft">
+                <i class="layui-icon layui-icon-spread-left"></i>
+            </li>
+            <li class="layui-nav-item layui-hide-xs">
+                <button class="layui-btn layui-btn-radius layui-btn-lg">签到打卡</button>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+            <li class="layui-nav-item"><input type="text" class="layui-input" id="test1"></li>
+            <li class="layui-nav-item"><a href="#">个人信息</a>
+                <dl class="layui-nav-child">
+                  <dd><a href="personal-main.html">基本信息</a></dd>
+                  <dd><a href="login.html">注销</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black" id="navigation">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed"><a class="homepage" href="admin-main.html">首页</a></li>
+                <li class="layui-nav-item"><a href="admin-staffmanage.html">职员管理</a></li>
+                <li class="layui-nav-item"><a href="admin-check.html">考勤记录</a></li>
+                <li class="layui-nav-item"><a href="admin-vocationmanage.html">请假管理</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!--主体内容 -->
+        <div class="layui-tab">
+            <ul class="layui-tab-title">
+                <li class="layui-this">待处理</li>
+                <li>已处理</li>
+            </ul>
+            <!-- 待处理内容 -->
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <table class="layui-hide" id="demo"></table>
+                    <script type="text/html" id="bar">
+                      <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+                      <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>
+                    </script>
+                </div>
+            <!-- 已处理内容 -->
+                <div class="layui-tab-item">
+                    <table class="layui-hide" id="demo1"></table>
+                      <script type="text/html" id="bar1">
+                      <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+                      <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>
+                      </script>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            欢迎使用智慧考勤系统！
+        </div>
+    </div>
+    <script src="./layui/layui.js"></script>
+    <script src="/static/build/layui.js"></script>
+    <script>
+//JS
+layui.use(['element', 'layer', 'form','util'], function(){
+  var element = layui.element
+  ,layer = layui.layer
+  ,util = layui.util
+  ,form = layui.form
+  ,$ = layui.$;
+  form.render('select','checkbox','radio');
+
+  //头部事件
+  util.event('lay-header-event', {
+    menuRight: function(){
+      layer.open({
+        type: 1
+        ,content: '<div style="padding: 15px;">处理右侧面板的操作</div>'
+        ,area: ['260px', '100%']
+        ,offset: 'rt' //右上角
+        ,anim: 5
+        ,shadeClose: true
+      });
+    }
+  });
+});
+
+var time=new Date();
+         var date = time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate()
+         console.log(date);
+
+
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#test1' //指定元素
+    ,type: 'date'
+    ,value: new Date(new Date())
+  });
+});
+
+<!-- 待处理表格 -->
+layui.use('table', function(){
+  var table = layui.table;
+
+  //展示已知数据
+  table.render({
+    elem: '#demo'
+    ,cols: [[ //标题栏
+      {field: 'id', title: '申请人', width: 120, sort: true}
+      ,{field: 'class', title: '所在部门', width: 120}
+      ,{field: 'start time', title: '开始时间', midWidth: 150}
+      ,{field: 'end time', title: '结束时间', midWidth: 160}
+      ,{field: 'apply time', title: '申请时间', midWidth: 160}
+      ,{field: 'operation', title: '操作',toolbar:'#bar', width: 160}
+    ]]
+    ,data: [{
+      "id": "杜甫"
+      ,"class": "研发部"
+      ,"start time": "2022/7/4"
+      ,"end time": "2022/7/5"
+      ,"apply time": "2022/7/3 14:00"
+    }, {
+      "id": "杜甫"
+      ,"class": "研发部"
+      ,"start time": "2022/7/4"
+      ,"end time": "2022/7/5"
+      ,"apply time": "2022/7/3 14:00"
+    }, {
+      "id": "杜甫"
+      ,"class": "研发部"
+      ,"start time": "2022/7/4"
+      ,"end time": "2022/7/5"
+      ,"apply time": "2022/7/3 14:00"
+    }, {
+      "id": "杜甫"
+      ,"class": "研发部"
+      ,"start time": "2022/7/4"
+      ,"end time": "2022/7/5"
+      ,"apply time": "2022/7/3 14:00"
+    }, {
+      "id": "杜甫"
+      ,"class": "研发部"
+      ,"start time": "2022/7/4"
+      ,"end time": "2022/7/5"
+      ,"apply time": "2022/7/3 14:00"
+    }, {
+      "id": "杜甫"
+      ,"class": "研发部"
+      ,"start time": "2022/7/4"
+      ,"end time": "2022/7/5"
+      ,"apply time": "2022/7/3 14:00"
+    }, {
+      "id": "杜甫"
+      ,"class": "研发部"
+      ,"start time": "2022/7/4"
+      ,"end time": "2022/7/5"
+      ,"apply time": "2022/7/3 14:00"
+    }, {
+      "id": "杜甫"
+      ,"class": "研发部"
+      ,"start time": "2022/7/4"
+      ,"end time": "2022/7/5"
+      ,"apply time": "2022/7/3 14:00"
+    }]
+    //,skin: 'line' //表格风格
+    ,even: true
+    ,page: true //是否显示分页
+    //,limits: [5, 8, 10]
+    ,limit: 10 //每页默认显示的数量
+  });
+});
+
+<!-- 已处理表格 -->
+layui.use('table', function(){
+  var table = layui.table;
+
+  //展示已知数据
+  table.render({
+    elem: '#demo1'
+    ,cols: [[ //标题栏
+      {field: 'id', title: '申请人', width: 120, sort: true}
+      ,{field: 'class', title: '所在部门', width: 120}
+      ,{field: 'start time', title: '开始时间', midWidth: 150}
+      ,{field: 'end time', title: '结束时间', midWidth: 160}
+      ,{field: 'apply time', title: '申请时间', midWidth: 160}
+      ,{field: 'operation', title: '操作',toolbar:'#bar1', width: 160}
+    ]]
+    ,data: [{
+      "id": "李白"
+      ,"class": "研发部"
+      ,"start time": "2022/7/4"
+      ,"end time": "2022/7/5"
+      ,"apply time": "2022/7/3 14:00"
+    }, {
+      "id": "李白"
+      ,"class": "研发部"
+      ,"start time": "2022/7/4"
+      ,"end time": "2022/7/5"
+      ,"apply time": "2022/7/3 14:00"
+    }, {
+      "id": "李白"
+      ,"class": "研发部"
+      ,"start time": "2022/7/4"
+      ,"end time": "2022/7/5"
+      ,"apply time": "2022/7/3 14:00"
+    }, {
+      "id": "李白"
+      ,"class": "研发部"
+      ,"start time": "2022/7/4"
+      ,"end time": "2022/7/5"
+      ,"apply time": "2022/7/3 14:00"
+    }, {
+      "id": "李白"
+      ,"class": "研发部"
+      ,"start time": "2022/7/4"
+      ,"end time": "2022/7/5"
+      ,"apply time": "2022/7/3 14:00"
+    }, {
+      "id": "李白"
+      ,"class": "研发部"
+      ,"start time": "2022/7/4"
+      ,"end time": "2022/7/5"
+      ,"apply time": "2022/7/3 14:00"
+    }, {
+      "id": "李白"
+      ,"class": "研发部"
+      ,"start time": "2022/7/4"
+      ,"end time": "2022/7/5"
+      ,"apply time": "2022/7/3 14:00"
+    }, {
+      "id": "李白"
+      ,"class": "研发部"
+      ,"start time": "2022/7/4"
+      ,"end time": "2022/7/5"
+      ,"apply time": "2022/7/3 14:00"
+    }]
+    //,skin: 'line' //表格风格
+    ,even: true
+    ,page: true //是否显示分页
+    //,limits: [5, 8, 10]
+    ,limit: 10 //每页默认显示的数量
+  });
+});
+
+    </script>
+</div>
+</body>
+</html>

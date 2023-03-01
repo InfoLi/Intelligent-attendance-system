@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>考勤系统</title>
+  <link rel="stylesheet" href="./layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="/static/build/layui.css" media="all">
+  <style>
+    .layui-input-block{
+        width: 48%;
+    }
+    .layui-input-inline{
+        width: 50%;
+    }
+    .table{
+      margin-left:100px;
+    }
+    .table-title{
+      margin:30px 0 0 0;
+      font-size:15px;
+      color:#009688;
+    }
+</style>
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo layui-hide-xs layui-bg-black">智慧考勤系统</div>
+    <!-- 头部区域（可配合layui 已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+      <!-- 移动端显示 -->
+      <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-header-event="menuLeft">
+        <i class="layui-icon layui-icon-spread-left"></i>
+      </li>
+      <li class="layui-nav-item layui-hide-xs"><button class="layui-btn layui-btn-radius layui-btn-lg">签到打卡</button></li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+        <li class="layui-nav-item"><input type="text" class="layui-input" id="test1"></li>
+        <li class="layui-nav-item"><a href="#">
+          个人信息
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="personal-main.html">基本信息</a></dd>
+            <dd><a href="login.html">注销</a></dd>
+        </dl></li>
+    </ul>
+  </div>
+  
+  <div class="layui-side layui-bg-black" id="navigation">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree" lay-filter="test">
+        <li class="layui-nav-item layui-nav-itemed">
+          <a class="homepage" href="admin-main.html">首页</a>
+        </li>
+        <li class="layui-nav-item">
+          <a href="admin-staffmanage.html">职员管理</a>
+        </li>
+        <li class="layui-nav-item"><a href="admin-check.html">考勤记录</a></li>
+        <li class="layui-nav-item"><a href="admin-vocationmanage.html">请假管理</a></li>
+      </ul>
+    </div>
+  </div>
+  <!-- 身体部分 -->
+  <div class="layui-body">
+    <!-- 分页导航 -->
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+          <li class="layui-this">管理</li>
+          <li>录入</li>
+          <li>权限分配</li>
+        </ul>
+
+        <div class="layui-tab-content">
+          <div class="layui-tab-item layui-show">
+            <!-- 管理的搜索部分 -->
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">字段搜索</label>
+                    <div class="layui-input-block">
+                    <select>
+                        <option>姓名</option>
+                        <option>工号</option>
+                        <option>部门</option>
+                        <option>职位</option>
+                    </select>
+                    </div>
+                </div>
+                <!-- 输入框和按钮 -->
+                <div class="layui-input-inline">
+                <label class="layui-form-label">输入字段</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input" autocomplete="off">
+                </div>
+                </div>
+                <button class="layui-btn" title="">搜索</button>   
+            </form>
+            <!-- 管理的表单部分 -->
+            <div class="table-title" style="text-align: center;">
+              <h1>查询结果</h1>
+            </div>
+            <div class="table" style="text-align: center;">
+              <table  class="layui-table" id="query" lay-filter="test"></table>
+            </div>
+            <script type="text/html" id="infoDemo">
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+            </script>
+            <script type="text/html" id="barDemo">
+              <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+              <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+            </script>
+          </div>
+
+            <!-- 录入信息部分 -->
+          <div class="layui-tab-item">
+            <form class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">姓名</label>
+                <div class="layui-input-block">
+                <input type="text" id="lastname" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+            </div></div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">工号</label>
+                <div class="layui-input-block">
+                <input type="text" id="lastname" placeholder="请输入工号" autocomplete="off" class="layui-input">
+            </div></div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                <input type="text" id="lastname" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div></div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">年龄</label>
+                <div class="layui-input-block">
+                <input type="text" id="lastname" placeholder="请输入年龄" autocomplete="off" class="layui-input">
+            </div></div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block">
+                <input type="radio" name="sex" value="0" title="男">
+                <input type="radio" name="sex" value="1" title="女">
+            </div></div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">部门</label>
+                <div class="layui-input-block">
+                <select>
+                    <option value="0">设计部</option>
+                    <option value="1">人事部</option>
+                </select>
+            </div></div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">职位</label>
+                <div class="layui-input-block">
+                <input type="text" id="lastname" placeholder="请输入职位" autocomplete="off" class="layui-input">
+            </div></div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">手机号码</label>
+                <div class="layui-input-block">
+                <input type="text" id="lastname" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+            </div></div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">邮箱</label>
+              <div class="layui-input-block">
+              <input type="text" id="lastname" placeholder="请输入一个有效的邮箱" autocomplete="off" class="layui-input">
+            </div></div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                <button type="button" class="layui-btn" id="lastname">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary layui-border-black">重置</button>
+            </div></div>
+            </form>
+          </div>
+          
+          <!-- 权限分配部分 -->
+          <div class="layui-tab-item">
+            <div class="table-title" style="text-align: center;">
+              <h1>权限分配</h1>
+            </div>
+            <div class="table" style="text-align: center;">
+              <table  class="layui-table" id="permission" lay-filter="test"></table>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    欢迎使用智慧考勤系统！
+  </div>
+</div>
+<script src="./layui/layui.js"></script>
+<script src="/static/build/layui.js"></script>
+<script>
+//JS 
+layui.use(['element', 'table', 'layer', 'form','util'], function(){
+  var element = layui.element
+  ,layer = layui.layer
+  ,util = layui.util
+  ,form = layui.form
+  ,table = layui.table
+  ,$ = layui.$;
+  form.render('select','checkbox','radio');
+  
+  //头部事件
+  util.event('lay-header-event', {
+    menuRight: function(){
+      layer.open({
+        type: 1
+        ,content: '<div style="padding: 15px;">处理右侧面板的操作</div>'
+        ,area: ['260px', '100%']
+        ,offset: 'rt' //右上角
+        ,anim: 5
+        ,shadeClose: true
+      });
+    }
+  });
+
+  table.render({
+    elem: '#query'
+    ,height: 500
+    ,width: 1500
+    ,url: '' //数据接口
+    ,page: true //开启分页
+    ,cellMinWidth: 50 //全局定义常规单元格的最小宽度
+    ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+    ,defaultToolbar: ['filter', 'exports', 'print']
+    ,cols: [[
+      {type: 'checkbox', fixed: 'left'}
+      ,{field:'id', title: '工号', sort: true, align: 'center'}
+      ,{field:'username', title: '姓名', align: 'center'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+      ,{field:'sex', title: '性别', sort: true, align: 'center'}
+      ,{field:'position', title: '职位', align: 'center'}
+      ,{field:'department', title: '部门', align: 'center'}
+      ,{field:'infomation', title: '详细信息', toolbar: '#infoDemo', align: 'center'} //单元格内容水平居中
+      ,{field:'operation', title: '操作',  toolbar: '#barDemo',align: 'center'} //单元格内容水平居右
+    ]]
+    ,data: [{
+      "id": "10001"
+      ,"username": "大飞老师"
+      ,"sex": "男"
+      ,"position": "技师"
+      ,"department": "管理层"
+    }]
+  });
+
+  table.render({
+    elem: '#permission'
+    ,height: 500
+    ,width: 1500
+    ,url: '' //数据接口
+    ,page: true //开启分页
+    ,cellMinWidth: 50 //全局定义常规单元格的最小宽度
+    ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+    ,defaultToolbar: ['filter', 'exports', 'print']
+    ,cols: [[
+      {type: 'checkbox', fixed: 'left'}
+      ,{field:'position', title: '职位', align: 'center'}
+      ,{field:'permission', title: '权限', align: 'center'} //width 支持：数字、百分比和不填写。你还可以通过
+      ,{field:'state', title: '状态', align: 'center'}
+      ,{field:'operation', title: '操作',  toolbar: '#barDemo',align: 'center'} //单元格内容水平居右
+    ]]
+    ,data: [{
+     "position": "管理员"
+     ,"permission":"人员管理"
+     ,"state":"√"
+    }
+    ,{
+     "position": "管理员"
+     ,"permission":"考勤管理"
+     ,"state":"√"
+    }
+    ,{
+     "position": "管理员"
+     ,"permission":"文件导入"
+     ,"state":"√"
+    }
+    ,{
+     "position": "普通职员"
+     ,"permission":"人员管理"
+     ,"state":"×"
+    }
+    ,{
+     "position": "普通职员"
+     ,"permission":"考勤管理"
+     ,"state":"×"
+    }
+    ,{
+     "position": "普通职员"
+     ,"permission":"文件导入"
+     ,"state":"√"
+    }]
+    
+  });
+
+  
+ 
+});
+
+var time=new Date();
+         var date = time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate() 
+         console.log(date);
+
+
+
+
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#test1' //指定元素
+    ,type: 'date'
+    ,value: new Date(new Date())
+  });
+});
+
+</script>
+</body>
+</html>

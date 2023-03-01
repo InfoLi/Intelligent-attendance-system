@@ -1,0 +1,209 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/style-admin.css">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/unit.css">
+	<script type="text/javascript" src="../js/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="../js/unit.js"></script>
+	<script type="text/javascript" src="../js/js-main-admin.js"></script>
+
+
+	<title>企业考勤管理系统-个人账户</title>
+</head>
+
+<body onload="startTime()">
+	<div class="head">
+		<h2>企业管理系统</h2>
+		<div class="head-right">
+			<span class="head-help"><a href="#">帮助</a></span>
+			<div id="head-time"></div>
+		</div>
+	</div>
+	<div id="navigation">
+		<nav role="navigation">
+			<ul>
+				<li class="layui-nav-item"><a class="homepage" href="/admin/home">首页</a></li>
+				<li class="layui-nav-item"><a href="/admin/manage">职员管理</a></li>
+				<li class="layui-nav-item"><a href="/admin/check">考勤记录</a></li>
+				<li class="layui-nav-item"><a href="/admin/manage">请假管理</a></li>
+				<li class="layui-nav-item"><a href="/admin/meet">视频会议</a></li>
+				<button onclick="window.location.href='/admin/sign'" style="padding:0 10px; margin:10px 60px 0 0; float:right;">签到</button>
+			</ul>
+		</nav>
+	</div>
+	<div class="left">
+		<span class="title-bar">基本信息</span><br />
+		<img src={{avatar}} style="margin:15px 40px;width:90px;height:90px;">
+		<!--    	<img src="images/touxiang.png" style="margin:15px 40px;width:90px;height:90px;">-->
+		<!--		<input type="file" id="chooseImage" name="file" value="ll" style="margin:15px 40px;width:32%" >-->
+		<input type="file" id="myimg" onchange="imgChange(this)" accept="image/png,image/gif,image/jpeg" />
+		<div style="margin-left:40px;">姓名：<span class="name">{{name}}</span></div>
+		<div style="margin-left:40px;">身份：<span class="identity">{{identity}}</span></div>
+		<div style="margin-left:40px;color:#ee3422" ;>您好，欢迎来到考勤系统！</div>
+		<div style="margin-left:40px;color:#ee3422" ;><a href="#">注销</a></div>
+	</div>
+	<div class="right">
+		<div class="right-main">
+			<span class="title-bar">公告</span><br />
+			<div class="line-block">
+				<ul>
+					<li>
+						<div class="title"><a class="normal" href="#" title="">欢迎进入会真山欢迎进入会</a></div>
+						<div class="date">10-14</div>
+						<div class="clear"></div>
+					</li>
+					<li>
+						<div class="title"><a class="normal" href="#" title="">湖东第三届“少儿迷你马拉松”火热开跑</a></div>
+						<div class="date">10-14</div>
+						<div class="clear"></div>
+					</li>
+					<li>
+						<div class="title"><a class="normal" href="#" title="">感谢城市美容师 爱心母女望星桥边送清凉</a></div>
+						<div class="date">10-14</div>
+						<div class="clear"></div>
+					</li>
+					<li>
+						<div class="title"><a class="normal" href="#" title="">常熟游泳馆免费向市民开放一天</a></div>
+						<div class="date">10-14</div>
+						<div class="clear"></div>
+					</li>
+					<li>
+						<div class="title"><a class="normal" href="#" title="">吴江“1058”工程累计投资超200亿元</a></div>
+						<div class="date">10-14</div>
+						<div class="clear"></div>
+					</li>
+					<li>
+						<div class="title"><a class="normal" href="#" title="">常熟江南版城市形象片</a></div>
+						<div class="date">10-14</div>
+						<div class="clear"></div>
+					</li>
+					<li>
+						<div class="title"><a class="normal" href="#" title="">融合商旅文同里示范全国</a></div>
+						<div class="date">10-14</div>
+						<div class="clear"></div>
+					</li>
+					<li>
+						<div class="title"><a class="normal" href="#" title="">苏州网络诈骗日均立案38起</a></div>
+						<div class="date">10-14</div>
+						<div class="clear"></div>
+					</li>
+					<li>
+						<div class="title"><a class="normal" href="#" title="">吴江“1058”工程累计投资超200亿元</a></div>
+						<div class="date">10-14</div>
+						<div class="clear"></div>
+					</li>
+					<li>
+						<div class="title"><a class="normal" href="#" title="">常熟江南版城市形象片</a></div>
+						<div class="date">10-14</div>
+						<div class="clear"></div>
+					</li>
+					<li>
+						<div class="title"><a class="normal" href="#" title="">融合商旅文同里示范全国</a></div>
+						<div class="date">10-14</div>
+						<div class="clear"></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="right-other">
+			<div class="Calendar">
+				<div id="idCalendarPre">&lt;&lt;</div>
+				<div id="idCalendarNext">&gt;&gt;</div>
+				<span id="idCalendarYear">2008</span>年 <span id="idCalendarMonth">8</span>月
+				<table cellspacing="0">
+					<thead>
+						<tr>
+							<td>日</td>
+							<td>一</td>
+							<td>二</td>
+							<td>三</td>
+							<td>四</td>
+							<td>五</td>
+							<td>六</td>
+						</tr>
+					</thead>
+					<tbody id="idCalendar">
+					</tbody>
+				</table>
+			</div>
+			<div class="order">
+				<span class="title-bar">班次信息</span><br />
+				<div class="order-detail">
+					<div style="margin:12px 0 12px 40px;">早班：<span>8:00-11:00</span>
+						<a href=""style="float:right;margin-right:45px;">修改</a></div>
+					<div style="margin:12px 0 12px 40px;">午班：<span>13:00-15:00</span>
+						<a href=""style="float:right;margin-right:45px;">修改</a></div>
+					<div style="margin:12px 0 12px 40px;">晚班：<span>15:00-17:00</span>
+						<a href=""style="float:right;margin-right:45px;">修改</a></div>
+				</div>
+			</div>
+		</div>
+		<script language="JavaScript">
+			var cale = new Calendar("idCalendar", {
+				SelectDay: new Date().setDate(10),
+				onSelectDay: function (o) {
+					o.className = "onSelect";
+				},
+				onToday: function (o) {
+					o.className = "onToday";
+				},
+				onFinish: function () {
+					$("idCalendarYear").innerHTML = this.Year;
+					$("idCalendarMonth").innerHTML = this.Month;
+					var flag = [10, 15, 20];
+					for (var i = 0, len = flag.length; i < len; i++) {
+						this.Days[flag[i]].innerHTML = "<a href='javascript:void(0);' onclick=\"alert('日期是:" + this
+							.Year + "/" + this.Month + "/" + flag[i] + "');return false;\">" + flag[i] + "</a>";
+					}
+				}
+			});
+
+			$("idCalendarPre").onclick = function () {
+				cale.PreMonth();
+			}
+			$("idCalendarNext").onclick = function () {
+				cale.NextMonth();
+			}
+		</SCRIPT>
+		<div style="width:100%;height:1px;" class="clear"></div>
+		<hr />
+		<div class="right-bottom">
+			<span class="title-bar">消息管理</span><br />
+			<table class="table table-striped" style="margin-left:40px; width:92%">
+				<caption>10-8</caption>
+				<thead>
+					<tr>
+						<th>工号</th>
+						<th>姓名</th>
+						<th>事务</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>2013001</td>
+						<td>李明</td>
+						<td>请假</td>
+						<td>未处理</td>
+						<td><a href="#">查看</a></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<td>2013019</td>
+						<td>随礼</td>
+						<td>请假</td>
+						<td>未处理</td>
+						<td><a href="#">查看</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>

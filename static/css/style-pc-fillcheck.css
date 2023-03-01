@@ -1,0 +1,22 @@
+.form-group{
+	width: 100%;
+	margin: 18px 40px;
+}
+
+.col-sm-2{
+	width: 10%;
+	padding: 0;
+	clear: both;
+	line-height: 45px;
+}
+
+.col-sm-10{
+	width: 24%;
+	float: left;
+}
+
+.form-control{
+	width: 60%;
+	margin: 8px 0;
+	float: left;
+}

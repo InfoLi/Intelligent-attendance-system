@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>注册页面</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="js/js-login-register.js"></script>
+    <style>
+        h1{
+            text-align: center;
+            margin-top: 10px;
+            font-size: 40px;
+            color: white;
+            font-weight: normal;
+        }
+        body{
+            background: url(/images/loginbg.png) no-repeat;
+            background-size:100% ;
+        }
+        .layui-form{
+            width:80%;
+            margin: 18px 400px;
+        }
+        .layui-form-label{
+            color:white;
+        }
+        .layui-input-block{
+            width:50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>注册</h1>
+<form class="layui-form"> 
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-block">
+        <input type="text" id="form1" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+    </div></div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">账号</label>
+        <div class="layui-input-block">
+        <input type="text" id="form0" placeholder="请输入账号" autocomplete="off" class="layui-input">
+    </div></div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">密码</label>
+        <div class="layui-input-block">
+        <input type="text" id="form2" placeholder="请输入密码" autocomplete="off" class="layui-input">
+    </div></div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">年龄</label>
+        <div class="layui-input-block">
+        <input type="text" id="form4" placeholder="请输入年龄" autocomplete="off" class="layui-input">
+    </div></div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-block">
+        <input type="radio" name="sex" value="0" title="男">
+        <input type="radio" name="sex" value="1" title="女">
+    </div></div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">部门</label>
+        <div class="layui-input-block">
+        <select id="form5">
+            <option value="0">设计部</option>
+            <option value="1">人事部</option>
+        </select>
+    </div></div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">职位</label>
+        <div class="layui-input-block">
+        <input type="text" id="form6" placeholder="请输入职位" autocomplete="off" class="layui-input">
+    </div></div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手机号码</label>
+        <div class="layui-input-block">
+        <input type="text" id="form7" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+    </div></div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">邮箱</label>
+        <div class="layui-input-block">
+        <input type="text" id="lastname" placeholder="请输入一个有效的邮箱" autocomplete="off" class="layui-input">
+    </div></div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+        <button type="button" class="layui-btn" id="forRegister" lay-submit lay-filter="*">立即提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary layui-border-black">重置</button>
+        <button type="button" class="layui-btn" onclick="window.location.href='/'">返回</button>
+    </div>
+  </div>
+</form>
+<script src="./layui/layui.js"></script>
+<script>
+layui.use('form', function(){
+  var form = layui.form;
+  form.render('select','checkbox','radio');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="show()">点我</button>
+</body>
+<script src="../layui/layui.js"></script>
+<script>
+function show(){
+  var a = layer.open({
+    type: 2,
+    area: ['80%','600px'],
+    title: 'OA审批',
+    shadeClose: true,
+    content: ['show.html','no']
+  });
+}
+</script>
+</html>

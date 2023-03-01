@@ -1,0 +1,29 @@
+.form-group{
+	width: 50%;
+	margin: 18px 40px;
+}
+
+.col-sm-2{
+	width: 10%;
+	padding: 0;
+	line-height: 45px;
+}
+
+.form-control{
+	width: 80%;
+	margin: 8px 0;
+	float: left;
+}
+
+.as-result{
+	margin-top: 30px;
+}
+
+.pagination-self{
+	width: 100%;
+	text-align: center;
+}
+
+.action{
+	padding: 10px 48px;
+}

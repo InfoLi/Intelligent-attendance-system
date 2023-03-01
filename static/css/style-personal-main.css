@@ -1,0 +1,26 @@
+.pm-main{
+	margin-top: 15px;
+	box-shadow: 0px 0px 10px #EAE7E7;
+	background-color: #ffffff;
+	width: 100%;
+	position: absolute;
+	padding-top: 15px;
+	padding-left: 20px;
+}
+
+.base{
+	margin: 10px 0 5px 40px;
+	width: 30%;
+	float: left;
+}
+
+.pm-power{
+	margin: 10px 0 20px 40px;
+	clear: both;
+}
+
+.testme{
+    width: 160px;
+    height: 26px;
+}
+

@@ -1,0 +1,43 @@
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebRTC webcam</title>
+    <style>
+    button {
+        padding: 8px 16px;
+    }
+
+    video {
+        width: 100%;
+    }
+
+    .option {
+        margin-bottom: 8px;
+    }
+
+    #media {
+        max-width: 1280px;
+    }
+    </style>
+</head>
+<body>
+
+<button id="receive" onclick="receive()">Receive</button>
+<button id="stop" style="display: none" onclick="stop()">Stop</button>
+
+<div id="media">
+    <h2>Audio</h2>
+    <audio id = "localAudio" controls autoplay></audio>
+    <audio id = "remoteAudio" controls autoplay></audio>
+
+    <h2>Media</h2>
+    <div style="display: none">
+        <video id="localVideo" autoplay="true" playsinline="true"></video>
+    </div>
+    <video id="serverVideo" autoplay="true" playsinline="true"></video>
+</div>
+
+<script src="/js/client2.js"></script>
+</body>
+</html>

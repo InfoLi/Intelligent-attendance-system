@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>GET VIDEO</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<input type="button" title="开启摄像头" value="开启摄像头" onclick="getMedia()" />
+<video id="video" width="500px" height="500px" autoplay="autoplay"></video>
+<canvas id="canvas" width="500px" height="500px"></canvas>
+<button id="snap" onclick="takePhoto()">拍照</button>
+<script>
+    //获得video摄像头区域
+    let video = document.getElementById("video");
+    function getMedia() {
+        let constraints = {
+            video: {width: 500, height: 500},
+            audio: true
+        };
+        /*
+        这里介绍新的方法:H5新媒体接口 navigator.mediaDevices.getUserMedia()
+        这个方法会提示用户是否允许媒体输入,(媒体输入主要包括相机,视频采集设备,屏幕共享服务,麦克风,A/D转换器等)
+        返回的是一个Promise对象。
+        如果用户同意使用权限,则会将 MediaStream对象作为resolve()的参数传给then()
+        如果用户拒绝使用权限,或者请求的媒体资源不可用,则会将 PermissionDeniedError作为reject()的参数传给catch()
+        */
+        let promise = navigator.mediaDevices.getUserMedia(constraints);
+        promise.then(function (MediaStream) {
+            video.srcObject = MediaStream;
+            video.play();
+        }).catch(function (PermissionDeniedError) {
+            console.log(PermissionDeniedError);
+        })
+    }
+    function takePhoto() {
+        //获得Canvas对象
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, 500, 500);
+        console.log(canvas.toDataURL());
+    }
+    // var saveFile = function(filename){
+	// //获取canvas标签里的图片内容
+	// var imgData = document.getElementById('canvas').toDataURL(type);
+	// imgData = imgData.replace(_fixType(type),'image/octet-stream');
+	
+    // var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+    // save_link.href = imgData;
+    // save_link.download = filename;
+   
+    // var event = document.createEvent('MouseEvents');
+    // event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    // save_link.dispatchEvent(event);
+    // };
+</script>
+</body>
+</html>

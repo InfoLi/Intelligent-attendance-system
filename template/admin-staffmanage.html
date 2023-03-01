@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>考勤系统</title>
+  <script type="text/javascript" src="../js/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+  <style>
+    .layui-input-block {
+      width: 48%;
+    }
+
+    .layui-input-inline {
+      width: 50%;
+    }
+
+    .table {
+      margin-left: 100px;
+    }
+
+    .table-title {
+      margin: 30px 0 0 0;
+      font-size: 15px;
+      color: #009688;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+      <div class="layui-logo layui-hide-xs layui-bg-black">智慧考勤系统</div>
+      <!-- 头部区域（可配合layui 已有的水平导航） -->
+      <ul class="layui-nav layui-layout-left">
+        <!-- 移动端显示 -->
+        <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-header-event="menuLeft">
+          <i class="layui-icon layui-icon-spread-left"></i>
+        </li>
+        <li class="layui-nav-item layui-hide-xs"><button onclick="window.location.href='/admin/sign'" class="layui-btn layui-btn-radius layui-btn-lg">签到打卡</button>
+        </li>
+      </ul>
+      <ul class="layui-nav layui-layout-right">
+        <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+        <li class="layui-nav-item"><input type="text" class="layui-input" id="test1"></li>
+        <li class="layui-nav-item"><a href="#">
+            个人信息
+          </a>
+          <dl class="layui-nav-child">
+            <dd><a href="/admin/info">基本信息</a></dd>
+            <dd><a href="/">注销</a></dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black" id="navigation">
+      <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+          <li class="layui-nav-item">
+            <a class="homepage" href="/admin/home">首页</a>
+          </li>
+          <li class="layui-nav-item layui-nav-itemed">
+            <a href="/admin/manage">职员管理</a>
+          </li>
+          <li class="layui-nav-item"><a href="/admin/check">考勤记录</a></li>
+          <li class="layui-nav-item"><a href="/admin/oa">请假管理</a></li>
+          <li class="layui-nav-item"><a href="/admin/meet">视频会议</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- 身体部分 -->
+    <div class="layui-body">
+      <!-- 分页导航 -->
+      <div class="layui-tab">
+        <ul class="layui-tab-title">
+          <li class="layui-this">管理</li>
+          <li>录入</li>
+        </ul>
+
+        <div class="layui-tab-content">
+          <div class="layui-tab-item layui-show">
+            <!-- 管理的搜索部分 -->
+            <form class="layui-form">
+              <div class="layui-form-item">
+                <label class="layui-form-label">字段搜索</label>
+                <div class="layui-input-block">
+                  <select id="selectmethod">
+                    <option value="姓名">姓名</option>
+                    <option value="工号">工号</option>
+                    <option value="职位">职位</option>
+                  </select>
+                </div>
+              </div>
+              <!-- 输入框和按钮 -->
+              <div class="layui-input-inline">
+                <label class="layui-form-label">输入字段</label>
+                <div class="layui-input-block">
+                  <input id="searchcontent" type="text" class="layui-input" autocomplete="off">
+                </div>
+              </div>
+            </form>
+            <button class="layui-btn" onclick="searchall()">搜索</button>
+            <!-- 管理的表单部分 -->
+            <div class="table-title" style="text-align: center;">
+              <h1>查询结果</h1>
+            </div>
+            <div class="table" style="text-align: center;">
+              <table class="layui-table" id="query" lay-filter="test"></table>
+            </div>
+            <script type="text/html" id="infoDemo">
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+            </script>
+            <script type="text/html" id="barDemo">
+              <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+              <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+            </script>
+          </div>
+
+          <!-- 录入信息部分 -->
+          <div class="layui-tab-item">
+            <form class="layui-form">
+              <div class="layui-form-item">
+                <label class="layui-form-label">姓名</label>
+                <div class="layui-input-block">
+                  <input type="text" id="name" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label">账号</label>
+                <div class="layui-input-block">
+                  <input type="text" id="account" placeholder="请输入账号" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                  <input type="text" id="password" value="123456789" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label">年龄</label>
+                <div class="layui-input-block">
+                  <input type="text" id="age" placeholder="请输入年龄" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block" id="sex">
+                  <input type="radio" name="sex1" value="1" title="男">
+                  <input type="radio" name="sex1" value="0" title="女">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label">职位</label>
+                <div class="layui-input-block">
+                  <input type="text" id="position" placeholder="请输入职位" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label">手机号码</label>
+                <div class="layui-input-block">
+                  <input type="text" id="phone" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+            </form>
+            <div class="layui-input-block">
+                  <button onclick="submittochange1()" type="button" class="layui-btn" id="lastname">立即提交</button>
+                  <button type="button" class="layui-btn layui-btn-primary layui-border-black">重置</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-footer">
+      <!-- 底部固定区域 -->
+      欢迎使用智慧考勤系统！
+    </div>
+  </div>
+  <script src="../layui/layui.js"></script>
+  <script>
+    //JS 
+    layui.use(['element', 'table', 'layer', 'form', 'util'], function () {
+      var element = layui.element
+        , layer = layui.layer
+        , util = layui.util
+        , form = layui.form
+        , table = layui.table
+        , $ = layui.$;
+      form.render('select', 'checkbox', 'radio');
+
+      //头部事件
+      util.event('lay-header-event', {
+        menuRight: function () {
+          layer.open({
+            type: 1
+            , content: '<div style="padding: 15px;">处理右侧面板的操作</div>'
+            , area: ['260px', '100%']
+            , offset: 'rt' //右上角
+            , anim: 5
+            , shadeClose: true
+          });
+        }
+      });
+
+      table.render({
+        elem: '#query'
+        , height: 500
+        , width: 1500
+        , url: '' //数据接口
+        , page: true //开启分页
+        , cellMinWidth: 50 //全局定义常规单元格的最小宽度
+        , toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+        , defaultToolbar: ['filter', 'exports', 'print']
+        , cols: [[
+          { type: 'checkbox', fixed: 'left' }
+          , { field: 'id', title: '工号', sort: true, align: 'center' }
+          , { field: 'username', title: '姓名', align: 'center' } //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+          , { field: 'sex', title: '性别', sort: true, align: 'center' }
+          , { field: 'position', title: '职位', align: 'center' }
+          , { field: 'department', title: '部门', align: 'center' }
+          , { field: 'infomation', title: '详细信息', toolbar: '#infoDemo', align: 'center' } //单元格内容水平居中
+          , { field: 'operation', title: '操作', toolbar: '#barDemo', align: 'center' } //单元格内容水平居右
+        ]]
+        , data:[]
+      });
+
+      table.render({
+        elem: '#permission'
+        , height: 500
+        , width: 1500
+        , url: '' //数据接口
+        , page: true //开启分页
+        , cellMinWidth: 50 //全局定义常规单元格的最小宽度
+        , toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+        , defaultToolbar: ['filter', 'exports', 'print']
+        , cols: [[
+          { type: 'checkbox', fixed: 'left' }
+          , { field: 'position', title: '职位', align: 'center' }
+          , { field: 'permission', title: '权限', align: 'center' } //width 支持：数字、百分比和不填写。你还可以通过
+          , { field: 'state', title: '状态', align: 'center' }
+          , { field: 'operation', title: '操作', toolbar: '#barDemo', align: 'center' } //单元格内容水平居右
+        ]]
+        , data: [{
+          "position": "管理员"
+          , "permission": "人员管理"
+          , "state": "√"
+        }
+          , {
+          "position": "管理员"
+          , "permission": "考勤管理"
+          , "state": "√"
+        }
+          , {
+          "position": "管理员"
+          , "permission": "文件导入"
+          , "state": "√"
+        }
+          , {
+          "position": "普通职员"
+          , "permission": "人员管理"
+          , "state": "×"
+        }
+          , {
+          "position": "普通职员"
+          , "permission": "考勤管理"
+          , "state": "×"
+        }
+          , {
+          "position": "普通职员"
+          , "permission": "文件导入"
+          , "state": "√"
+        }]
+
+      });
+
+
+
+    });
+
+    async function search() {
+      var r
+      await $.post('/deal', data = {'method': 'test' }, function (ret) {
+        r = ret;
+      });
+
+      rjson = JSON.parse(r);
+      layui.use(['table',], function () {
+        var table = layui.table;
+        table.render({
+          elem: '#query'
+          , height: 500
+          , width: 1500
+          , url: '' //数据接口
+          , page: true //开启分页
+          , cellMinWidth: 50 //全局定义常规单元格的最小宽度
+          , toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+          , defaultToolbar: ['filter', 'exports', 'print']
+          , cols: [[
+            { type: 'checkbox', fixed: 'left' }
+            , { field: 'id', title: '工号', sort: true, align: 'center' }
+            , { field: 'username', title: '姓名', align: 'center' } //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+            , { field: 'sex', title: '性别', sort: true, align: 'center' }
+            , { field: 'position', title: '职位', align: 'center' }
+            , { field: 'department', title: '部门', align: 'center' }
+            , { field: 'infomation', title: '详细信息', toolbar: '#infoDemo', align: 'center' } //单元格内容水平居中
+            , { field: 'operation', title: '操作', toolbar: '#barDemo', align: 'center' } //单元格内容水平居右
+          ]]
+          , data:rjson,
+        });
+      });
+    }
+
+    var time = new Date();
+    var date = time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate()
+    console.log(date);
+
+
+
+
+    layui.use('laydate', function () {
+      var laydate = layui.laydate;
+
+      //执行一个laydate实例
+      laydate.render({
+        elem: '#test1' //指定元素
+        , type: 'date'
+        , value: new Date(new Date())
+      });
+    });
+
+
+  async function submittochange1() {
+
+           var form1=$("#name").val();
+           var form2=$("#age").val();
+           var form3=$('input[name="sex1"]:checked').val();
+           var form4=$("#position").val();
+           var form5=$("#phone").val();
+           var form6=$("#account").val();
+           var form7=$("#password").val();
+           console.log(form3)
+           //数据库需要默认给出管理员的部门 和 默认密码123456
+            if (confirm("您确定要录入吗？\n\n请确认！")==true)
+            {
+                $.post('/deal',data={'method':'adminRegister','userName':form1,'userRge':form2,'userSex':form3,'userPosition':form4,'userPhone':form5,'Name':form6,"password":form7},function(ret){
+                       if(ret==='ok'){
+                            alert('录入成功');
+                       }
+                       else{
+                            alert("请稍后尝试点击录入");
+                       }
+                });
+            }else{
+             return false;
+            }
+}
+
+async function searchall() {
+
+    var selectmethod=$("#selectmethod").val();
+    var searchcontent=$("#searchcontent").val();
+    var searchtype="all";
+    var result_
+    if(searchcontent.length===0){
+        //查询所有
+        await $.post('/deal',data={'method':'searchInfo','searchtype':searchtype,"searchcontent":""},function(ret){
+            if(ret==="fail"){
+                alert("查询失败");
+            }
+            else{
+              result_ = ret;
+
+            }
+
+        });
+    }
+    else{
+    if(selectmethod==='工号'){
+        searchtype="id";
+    }
+    else if(selectmethod==='姓名'){
+        searchtype="name";
+    }
+    else if(selectmethod==='职位'){
+        searchtype="position";
+    }
+
+    await $.post('/deal',data={'method':'searchInfo','searchtype':searchtype,"searchcontent":searchcontent},function(ret){
+
+            if(ret==="fail"){
+                alert("查询失败");
+            }
+            else{
+
+            result_ = ret;
+            }
+     });
+
+
+    }
+
+    var resultjson = JSON.parse(result_);
+
+    layui.use(['table',], function () {
+        var table = layui.table;
+        table.render({
+        elem: '#query'
+        , height: 500
+        , width: 1500
+        , url: '' //数据接口
+        , page: true //开启分页
+        , cellMinWidth: 50 //全局定义常规单元格的最小宽度
+        , toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+        , defaultToolbar: ['filter', 'exports', 'print']
+        , cols: [[
+          { type: 'checkbox', fixed: 'left' }
+          , { field: 'id', title: '工号', sort: true, align: 'center' }
+          , { field: 'username', title: '姓名', align: 'center' } //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+          , { field: 'sex', title: '性别', sort: true, align: 'center' }
+          , { field: 'position', title: '职位', align: 'center' }
+          , { field: 'department', title: '部门', align: 'center' }
+          , { field: 'infomation', title: '详细信息', toolbar: '#infoDemo', align: 'center' } //单元格内容水平居中
+          , { field: 'operation', title: '操作', toolbar: '#barDemo', align: 'center' } //单元格内容水平居右
+        ]]
+        , data:resultjson
+        });
+    });
+
+}
+
+
+
+
+function deleteStaff(line) {
+
+           var TB = document.getElementsByTagName('tbody')[line];
+           var form1=TB.rows[0].cells[0].innerHTML;
+
+           if (confirm("您真的确定要删除吗？\n\n请确认！")==true){
+              $.post('/deal',data={'method':'deleteUserAdmin','staff_id':form1},function(ret){
+                   if(ret==='ok'){
+                        alert("删除成功");
+                   }
+                   else{
+                        alert("删除失败");
+                   }
+              });
+           }else{
+             return false;
+           }
+
+
+}
+
+
+
+function gotochange(line) {
+           var TB = document.getElementsByTagName('tbody')[line];
+           var form1=TB.rows[0].cells[0].innerHTML;
+           window.location.replace("/admin/cinfo?id=" + form1)
+}
+
+
+  </script>
+</body>
+
+</html>

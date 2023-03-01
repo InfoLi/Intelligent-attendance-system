@@ -1,0 +1,27 @@
+.form-control{
+	margin: 18px 40px;
+	width: 91.8%;
+}
+
+.col-lg-6{
+	width: 97%;
+	padding-left: 0px;
+	margin-top: 0px;
+}
+
+.input-group-btn:last-child>.btn{
+	margin-top: 18px;
+}
+
+.as-result{
+	margin-top: 30px;
+}
+
+.pagination-self{
+	width: 100%;
+	text-align: center;
+}
+
+.action{
+	padding: 10px 48px;
+}

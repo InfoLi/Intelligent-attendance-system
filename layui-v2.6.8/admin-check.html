@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>考勤系统</title>
+  <link rel="stylesheet" href="./layui/css/layui.css">
+  <link rel="stylesheet" href="/static/build/layui.css" media="all">
+  <!-- css补充 -->
+  <style type="text/css">
+    .right{
+      margin: 20px 0 0 50px;
+      width: 85%;
+      float: left;
+      padding: 10px 10px 10px 10px;
+      box-shadow: 0px 0px 10px #EAE7E7;
+      background-color: #ffffff;}
+    .sign {
+      width: 60%;
+      margin: 5px 40px;
+      border-radius: 3px;
+      border: 1px solid #EAEAEA;
+      padding: 20px;}
+    .card {
+      width: 60%;
+      margin: 5px 40px;
+      border-radius: 3px;
+      padding: 20px;}
+  </style>
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo layui-hide-xs layui-bg-black">智慧考勤系统</div>
+    <!-- 头部区域（可配合layui 已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+      <!-- 移动端显示 -->
+      <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-header-event="menuLeft">
+        <i class="layui-icon layui-icon-spread-left"></i>
+      </li>
+      <li class="layui-nav-item layui-hide-xs"><button class="layui-btn layui-btn-radius layui-btn-lg">签到打卡</button></li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+        <li class="layui-nav-item"><input type="text" class="layui-input" id="test1"></li>
+        <li class="layui-nav-item"><a href="#">
+          个人信息
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="personal-main.html">基本信息</a></dd>
+            <dd><a href="login.html">注销</a></dd>
+        </dl></li>
+    </ul>
+  </div>
+  
+  <div class="layui-side layui-bg-black" id="navigation">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree" lay-filter="test">
+        <li class="layui-nav-item"><a class="homepage" href="admin-main.html">首页</a></li>
+        <li class="layui-nav-item"><a href="admin-staffmanage.html">职员管理</a></li>
+        <li class="layui-nav-item layui-nav-itemed"><a href="admin-check.html">考勤记录</a></li>
+        <li class="layui-nav-item"><a href="admin-vocationmanage.html">请假管理</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div class="layui-body">
+      <div class="layui-tab">
+          <ul class="layui-tab-title">
+            <li class="layui-this">签到</li>
+            <li>概况记录</li>
+            <li>签到查询</li>
+            <li>管理</li>
+          </ul>
+          <div class="layui-tab-content">
+            <!-- 卡片内容1 -->
+            <div class="layui-tab-item  layui-show">
+              <!-- 内嵌卡片 -->
+              <div class="right">
+                <div class="layui-row">
+                  <!-- 9/12内容 -->
+                  <div class="layui-col-md5">
+                    <table class="layui-table" lay-even lay-skin="nob" >
+                      <thead>
+                        <tr>
+                            <th>班次信息</th>
+                            <th></th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>班次</td>
+                          <td>早班</td>
+                        </tr>
+                        <tr>
+                          <td>时间</td>
+                          <td>8：00-11：00</td>
+                        </tr>
+                        <tr>
+                          <td>签到时间</td>
+                          <td>8：00-8：30</td>
+                        </tr>
+                        <tr>
+                          <td>签退时间</td>
+                          <td>11：00-11：30</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- 3/12内容 -->
+                  <div class="layui-col-md5">
+                    <div id="test2" style="float: right;"></div>
+                  </div>
+                </div>
+                <div class="sign">
+                  实际签到时间：
+                  <span class="sign-time" style="padding-right: 20%;">8:23</span>
+                  <button class="layui-btn layui-btn-primary">签到</button>
+                </div>
+                <div class="sign">
+                  实际签退时间：
+                  <span class="sign-time" style="padding-right: 20%;">8:23</span>
+                  <button class="layui-btn layui-btn-primary">签到</button>
+                </div>
+              </div>
+            </div>
+            <!-- 卡片内容2 -->
+            <div class="layui-tab-item ">
+              <!-- 内嵌卡片 -->
+              <div class="right">
+                <span>考勤记录>签到</span>
+                <div class="layui-row">
+                  <!-- 9/12内容 -->
+                  <div class="layui-col-md6">
+                    <form class="layui-form" action="">
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">时间</label>
+                        <div class="layui-input-block">
+                          <select name="year" lay-verify="required">
+                            <option value="">请选择年份</option>
+                            <option value="0">2018</option>
+                            <option value="1">2019</option>
+                            <option value="2">2020</option>
+                            <option value="3">2022</option>
+                            <option value="4">2023</option>
+                          </select>
+                        </div>
+                        <div class="layui-input-block" style="padding-top: 10px;">
+                          <select name="month" lay-verify="required">
+                            <option value="">请选择月份</option>
+                            <option value="0">1</option>
+                            <option value="1">2</option>
+                            <option value="2">3</option>
+                            <option value="3">4</option>
+                            <option value="4">5</option>
+                            <option value="5">6</option>
+                            <option value="6">7</option>
+                            <option value="7">8</option>
+                            <option value="8">9</option>
+                            <option value="9">10</option>
+                            <option value="10">11</option>
+                            <option value="11">12</option>
+                          </select>
+                        </div>
+                      </div> 
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">部门</label>
+                        <div class="layui-input-block">
+                          <select name="department" lay-verify="required">
+                            <option value="">请选择部门</option>
+                            <option value="0">所有部门</option>
+                            <option value="1">研发部</option>
+                            <option value="2">销售部</option>
+                            <option value="3">设计中心</option>
+                            <option value="4">市场部</option>
+                          </select>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="right">
+                <span>查询结果</span>
+                <table id="datetable1"></table>
+              </div>
+            </div>
+            <!-- 卡片内容3 -->
+            <div class="layui-tab-item">
+              <div class="right">
+                <span>考勤记录>个人签到查询</span>
+                <!-- 查询表格 -->
+                <form class="layui-form" action="">
+                  <!-- 起始时间 -->
+                  <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <div class="layui-row">
+                        <label class="layui-form-label">起始时间</label>
+                        <div class="layui-col-md3" style="padding-left:10px;">
+                          <select name="year" lay-verify="required">
+                            <option value="">请选择年份</option>
+                            <option value="0">2018</option>
+                            <option value="1">2019</option>
+                            <option value="2">2020</option>
+                            <option value="3">2022</option>
+                            <option value="4">2023</option>
+                          </select>
+                        </div>
+                        <div class="layui-col-md3" style="padding-left:10px;">
+                          <select name="year" lay-verify="required">
+                            <option value="">请选择月份</option>
+                            <option value="0">1</option>
+                            <option value="1">2</option>
+                            <option value="2">3</option>
+                            <option value="3">4</option>
+                            <option value="4">5</option>
+                            <option value="5">6</option>
+                            <option value="6">7</option>
+                            <option value="7">8</option>
+                            <option value="8">9</option>
+                            <option value="9">10</option>
+                            <option value="10">11</option>
+                            <option value="11">12</option>
+                          </select>
+                        </div>
+                        <div class="layui-col-md3" style="padding-left:10px;">
+                          <select name="year" lay-verify="required">
+                            <option value="">请选择日期</option>
+                            <option value="0">1</option>
+                            <option value="1">2</option>
+                            <option value="2">3</option>
+                            <option value="3">4</option>
+                            <option value="4">5</option>
+                            <option value="5">6</option>
+                            <option value="6">7</option>
+                            <option value="7">8</option>
+                            <option value="8">9</option>
+                            <option value="9">10</option>
+                            <option value="10">11</option>
+                            <option value="11">12</option>
+                            <option value="12">13</option>
+                            <option value="13">14</option>
+                            <option value="14">15</option>
+                            <option value="15">16</option>
+                            <option value="16">17</option>
+                            <option value="17">18</option>
+                            <option value="18">19</option>
+                            <option value="19">20</option>
+                            <option value="20">21</option>
+                            <option value="21">22</option>
+                            <option value="22">23</option>
+                            <option value="23">24</option>
+                            <option value="24">25</option>
+                            <option value="25">26</option>
+                            <option value="26">27</option>
+                            <option value="27">28</option>
+                            <option value="28">29</option>
+                            <option value="29">30</option>
+                            <option value="30">31</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 终止时间 -->
+                  <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <div class="layui-row">
+                        <label class="layui-form-label">终止时间</label>
+                        <div class="layui-col-md3" style="padding-left:10px;">
+                          <select name="year" lay-verify="required">
+                            <option value="">请选择年份</option>
+                            <option value="0">2018</option>
+                            <option value="1">2019</option>
+                            <option value="2">2020</option>
+                            <option value="3">2022</option>
+                            <option value="4">2023</option>
+                          </select>
+                        </div>
+                        <div class="layui-col-md3" style="padding-left:10px;">
+                          <select name="year" lay-verify="required">
+                            <option value="">请选择月份</option>
+                            <option value="0">1</option>
+                            <option value="1">2</option>
+                            <option value="2">3</option>
+                            <option value="3">4</option>
+                            <option value="4">5</option>
+                            <option value="5">6</option>
+                            <option value="6">7</option>
+                            <option value="7">8</option>
+                            <option value="8">9</option>
+                            <option value="9">10</option>
+                            <option value="10">11</option>
+                            <option value="11">12</option>
+                          </select>
+                        </div>
+                        <div class="layui-col-md3" style="padding-left:10px;">
+                          <select name="year" lay-verify="required">
+                            <option value="">请选择日期</option>
+                            <option value="0">1</option>
+                            <option value="1">2</option>
+                            <option value="2">3</option>
+                            <option value="3">4</option>
+                            <option value="4">5</option>
+                            <option value="5">6</option>
+                            <option value="6">7</option>
+                            <option value="7">8</option>
+                            <option value="8">9</option>
+                            <option value="9">10</option>
+                            <option value="10">11</option>
+                            <option value="11">12</option>
+                            <option value="12">13</option>
+                            <option value="13">14</option>
+                            <option value="14">15</option>
+                            <option value="15">16</option>
+                            <option value="16">17</option>
+                            <option value="17">18</option>
+                            <option value="18">19</option>
+                            <option value="19">20</option>
+                            <option value="20">21</option>
+                            <option value="21">22</option>
+                            <option value="22">23</option>
+                            <option value="23">24</option>
+                            <option value="24">25</option>
+                            <option value="25">26</option>
+                            <option value="26">27</option>
+                            <option value="27">28</option>
+                            <option value="28">29</option>
+                            <option value="29">30</option>
+                            <option value="30">31</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 班次 -->
+                  <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <label class="layui-form-label">终止时间</label>
+                      <input type="checkbox" name="" title="早班" lay-skin="primary">
+                      <input type="checkbox" name="" title="晚班" lay-skin="primary"> 
+                      <input type="checkbox" name="" title="所有班次" lay-skin="primary" checked> 
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <div class="layui-row">
+                        <label class="layui-form-label">姓名/部门</label>
+                        <div class="layui-col-md3" style="padding-left:10px;">
+                          <input type="text" name="title" required  lay-verify="required" placeholder="请输入姓名/部门" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-col-md3" style="padding-left:10px;">
+                          <button type="button" 	class="layui-btn layui-btn-primary">查询</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <div class="right" style="width:60%;">
+                  <span>查询结果</span>
+                  <table id="datetable2"></table>
+                </div>
+              </div>
+            </div>
+            <!-- 卡片内容4 -->
+            <div class="layui-tab-item">
+              <div class="right" style="width: 60%;">
+                <span>考勤记录>管理</span>
+                <!-- 查询表格 -->
+                <table id="datetable3"></table>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+  </div>
+  
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    欢迎使用智慧考勤系统！
+  </div>
+</div>
+<script src="./layui/layui.js"></script>
+<script src="/static/build/layui.js"></script>
+<script>
+//JS 
+layui.use(['element', 'layer', 'util'], function(){
+  var element = layui.element
+  ,layer = layui.layer
+  ,util = layui.util
+  ,$ = layui.$;
+  
+  //头部事件
+  util.event('lay-header-event', {
+    menuRight: function(){
+      layer.open({
+        type: 1
+        ,content: '<div style="padding: 15px;">处理右侧面板的操作</div>'
+        ,area: ['260px', '100%']
+        ,offset: 'rt' //右上角
+        ,anim: 5
+        ,shadeClose: true
+      });
+    }
+  });
+});
+
+var time=new Date();
+         var date = time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate() 
+         console.log(date);
+
+
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#test1' //指定元素
+    ,type: 'date'
+    ,value: new Date(new Date())
+  });
+});
+
+// 签到-日历表
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  laydate.render({
+    elem: '#test2'
+    ,position: 'static'
+    ,change: function(value, date){ //监听日期被切换
+      lay('#testView').html(value);
+    }
+  });
+});
+
+// 概况记录-下选框
+layui.use('form', function(){
+  var form = layui.form;
+  
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+    layer.msg(JSON.stringify(data.field));
+    return false;
+  });
+});
+
+// 概况记录-表格
+layui.use('table', function(){
+  var table = layui.table;
+   //第一个实例
+   table.render({
+    elem: '#datetable1'
+    ,height: 312
+    // ,url: '' //数据接口
+    ,page: true //开启分页
+    ,cols: [[ //表头
+      {field: 'id', title: '工号', width:135, fixed: 'left'}
+      ,{field: 'username', title: '姓名', width:80}
+      ,{field: 'position', title: '职位', width:80}
+      ,{field: 'department', title: '部门', width:80} 
+      ,{field: 'number-attendance', title: '应出勤次数', width: 135}
+      ,{field: 'late', title: '迟到', sort: true,width: 80}
+      ,{field: 'leave-early', title: '早退', sort: true, width: 80}
+      ,{field: 'ask-for-leave', title: '请假', sort: true, width: 80}
+      ,{field: 'absenteeism', title: '旷工', sort: true, width: 80}
+      ,{field: 'actual-attendance', title: '实际出勤次数',sort: true, width: 135}
+      ,{field: 'attendance', title: '出勤率',sort: true, width: 135}
+    ]]
+    ,data:[{
+      "id":"a1001",
+      "username":"杨晓洁",
+      "position":"管理员",
+      "department":"财务部",
+      "number-attendance":"15",
+      "late":"1",
+      "leave-early":"1",
+      "ask-for-leave":"1",
+      "absenteeism":"0",
+      "actual-attendance":"none",
+      "attendance":"none"
+    },]
+  });  
+});
+
+//  签到查询-表格
+layui.use('table', function(){
+  var table = layui.table;
+   //第一个实例
+   table.render({
+    elem: '#datetable2'
+    ,height: 312
+    // ,url: '' //数据接口
+    ,page: true //开启分页
+    ,cols: [[ //表头
+      {field: 'id', title: '工号', width:135, fixed: 'left'}
+      ,{field: 'username', title: '姓名', width:80}
+      ,{field: 'date', title: '日期', width:80}
+      ,{field: 'classes', title: '班次', width:80} 
+      ,{field: 'check-in-time', title: '签到时间', width: 135}
+      ,{field: 'state', title: '状态', width: 80}
+    ]]
+    ,data:[{
+      "id":"2013019",
+      "username":"杨晓洁",
+      "date":"10-8",
+      "classes":"早班",
+      "check-in-time":"8:20",
+      "state":"正常",
+    },]
+  });  
+});
+
+//  管理-表格
+layui.use('table', function(){
+  var table = layui.table;
+   //第一个实例
+   table.render({
+    elem: '#datetable3'
+    ,height: 312
+    // ,url: '' //数据接口
+    ,page: true //开启分页
+    ,cols: [[ //表头
+      {field: 'id', title: '工号', width:135, fixed: 'left'}
+      ,{field: 'username', title: '姓名', width:80}
+      ,{field: 'date', title: '日期', width:80}
+      ,{field: 'apply', title: '申请', width:80} 
+      ,{field: 'reason', title: '原因',width:230}
+    ]]
+    ,data:[{
+      "id":"2013019",
+      "username":"杨晓洁",
+      "date":"10-8",
+      "apply":"补签",
+      "reason":"家里有事",
+    },]
+  });  
+});
+</script>
+</body>
+</html>

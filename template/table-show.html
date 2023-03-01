@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script type="text/javascript" src="../js/jquery-3.6.0.min.js"></script>
+    <title>Document</title>
+      <!-- css补充 -->
+    <style type="text/css">
+        .sign {
+        width: 60%;
+        margin: 5px 40px;
+        border-radius: 3px;
+        border: 1px solid #EAEAEA;
+        padding: 20px;}
+    </style>
+</head>
+<body>
+    <div class="sign">
+        <div>
+            姓名：
+            <span class="sign-time" style="padding-right: 20%;" id="name">{{name}}</span>
+        </div>
+        <div style="margin-top:10px ;">
+            部门：
+            <span class="sign-time" style="padding-right: 20%;">{{department}}</span>
+        </div>
+        <div style="margin-top:10px ;">
+            申请理由：
+            <span class="sign-time" style="padding-right: 20%;" >{{reason}}</span>
+        </div>
+        <div style="margin-top:10px ;">
+            申请时间：
+            <span class="sign-time" style="padding-right: 20%;" id="applyTime">{{applyTime}}</span>
+        </div>
+        <div style="margin-top:10px ;">
+            起始时间：
+            <span class="sign-time" style="padding-right: 20%;">{{startTime}}</span>
+        </div>
+        <div style="margin-top:10px ;">
+            终止时间：
+            <span class="sign-time" style="padding-right: 20%;" >{{endTime}}</span>
+        </div>
+    </div>
+    <div class="sign">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+              <label class="layui-form-label">审核：</label>
+              <div class="layui-input-block">
+                <select name="year" lay-verify="required" id="selApproval">
+                  <option value="1">批准</option>
+                  <option value="2">拒绝</option>
+                </select>
+              </div>
+            </div>
+        </form>
+        <div>
+            <label class="layui-form-label">理由：</label>
+            <textarea  name="" required lay-verify="required" placeholder="请输入" class="layui-textarea" id="remarks"></textarea>
+        </div>
+        <button type="button" class="layui-btn layui-btn-normal" style="margin-top: 15px;margin-left: 15px;" id="upApproval">提交OA审批</button>
+    </div>
+</body>
+<script src="../layui/layui.js"></script>
+<script>
+// 下选框
+layui.use('form', function(){
+  var form = layui.form;
+  
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+    layer.msg(JSON.stringify(data.field));
+    return false;
+  });
+});
+
+$("#upApproval").on('click',function(){
+            form1 = $("#selApproval").val();
+            name = $("#name").text();
+            applyTime = $("#applyTime").text();
+            remarks = $("#remarks").val();
+
+            $.post('/deal',data={'method':"approve",'name':name,'applyTime':applyTime,'sel':form1,'remarks':remarks},function(ret){
+            if(ret==='ok'){
+                    alert("审批完成");
+                }
+                else{
+                    alert("审批失败");
+                }
+            })
+        });
+</script>
+</html>

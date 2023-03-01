@@ -1,0 +1,22 @@
+.form-group{
+	width: 50%;
+	margin: 18px 40px;
+}
+
+.col-sm-2{
+	width: 10%;
+	padding: 0;
+	line-height: 45px;
+}
+
+.form-control{
+	margin: 8px 0;
+}
+
+.insert-group{
+	width: 100%;
+}
+
+.btn{
+	margin-left: 40px;
+}
